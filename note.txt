@@ -1,0 +1,7 @@
+how to push data in git
+git add .
+git commit -m 'type here message related to ypor push the code'
+like added butto or something else
+
+this for push the code 
+git push origin main
