@@ -1,44 +1,71 @@
-import React, { useState } from "react";
-import './style.css';
+import React, { useState } from 'react'
+import './style.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-const Login = () => {
+function Login() {
+//    const navigate = useNavigate()
+
     const [values, setValues] = useState({
         email: '',
-        password:''
+        password: ''
     })
+    const navigate = useNavigate()
+    axios.defaults.withCredentials = true;
+    const [error, setError] = useState('')
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        debugger;
+    
+        try {
+            // const response = await axios.post(
+            //     'http://localhost:3000/adminlogin',
+            //     values,
+            //     {
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //             'Access-Control-Allow-Origin': '*',
+            //         },
+            //     }
+            // );
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        axios.post('http://localhost:3000/auth/adminlogin')
-        .then(result => console.log(result))
-        .catch(err => console.log(err))
-    }
+            alert("successfully Login")
+            navigate('/dashboard');
+            // if (response.data.Status === 'Success') {
+            // } else {
+            //     setError(response.data.Error);
+            // }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
 
     return (
-        <div className='d-flex justify-content-center align-items-center vh-100 login loginPage'>
-        <div className="p-3 rounded w-25 border loginForm">
-            <h2>Login Page</h2>
-            <form  onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email"><strong>Email</strong></label>
-                    <input type="email" id="email"  placeholder="Enter Email" 
-                    onChange={(e) => setValues({...values, email : e.target.value})} className="form-control" />
-                    
+        <div className='d-flex justify-content-center align-items-center vh-100 loginPage'>
+            <div className='p-3 rounded w-25 border loginForm'>
+                <div className='text-danger'>
+                    {error && error}
                 </div>
-                <div>
-                    <label htmlFor="password"><strong>Password</strong></label>
-                    <input type="password" id="password"
-                    onChange={(e) => setValues({...values, password : e.target.value})} className="form-control" />
-                </div>
-                <button type="submit" className="btn btn-primary mt-3">Login</button>
-            </form>
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className='mb-3'>
+                        <label htmlFor="email"><strong>Email</strong></label>
+                        <input type="email" placeholder='Enter Email' name='email' 
+                          onChange={e => setValues({...values, email: e.target.value})} className='form-control rounded-0' autoComplete='off'/>
+                    </div>
+                    <div className='mb-3'>
+                        <label htmlFor="password"><strong>Password</strong></label>
+                        <input type="password" placeholder='Enter Password' name='password'
+                          onChange={e => setValues({...values, password: e.target.value})} className='form-control rounded-0' />
+                    </div>
+                    <button type='submit' className='btn btn-success w-100 rounded-0'> Log in</button>
+                    <p>You are agree to aour terms and policies</p>
+                </form>
+            </div>
         </div>
-        </div>
-    );
-};
+    )
+}
 
-export default Login;
-
-
+export default Login
