@@ -43,6 +43,7 @@ function Dashboard() {
 									<i className="fs-4 bi-speedometer2"></i> <span className="ms-1 d-none d-sm-inline">Employee Manage</span> </Link>
 							</li>
 							<li>
+								
 								<Link to="/employee" className="nav-link px-0 align-middle text-white">
 									<i className="fs-4 bi-people"></i> <span className="ms-1 d-none d-sm-inline">Categories</span> </Link>
 							</li>
